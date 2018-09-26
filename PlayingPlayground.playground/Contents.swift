@@ -13,31 +13,44 @@ if let name = optionalName {
 }
 
 
-func greet(_ person: String, on day: String) -> String {
-    return "Hello \(person), today is \(day)."
+class Shape {
+    var numberOfSides = 0
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
 }
-greet("John", on: "Wednesday")
-
-//
-
-func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
-    var min = scores[0]
-    var max = scores[0]
-    var sum = 0
+var shape = Shape()
+shape.numberOfSides = 7
+var shapeDescription = shape.simpleDescription()
+class NamedShape {
+    var numberOfSides: Int = 0
+    var name: String
     
-    for score in scores {
-        if score > max {
-            max = score
-        } else if score < min {
-            min = score
-        }
-            sum += score
+    init(name: String) {
+        self.name = name
     }
     
-    return (min, max, sum)
+    func simpleDescription() -> String {
+        return "A Shape with \(numberOfSides) sides."
+    }
 }
-let statistics = calculateStatistics(scores: [5, 3, 100, 3, 9])
-print(statistics.sum)
-//Prints "120"
-print(statistics.2)
-//Prints "120"
+
+class Square: NamedShape {
+    var sideLength: Double
+    
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 4
+    }
+    
+    func area() -> Double {
+        return sideLength * sideLength
+    }
+    override func simpleDescription() -> String {
+    return "A square with sides of length  \(sideLength)."
+    }
+}
+let test = Square(sideLength: 5.2, name:  "my test square")
+test.area()
+test.simpleDescription()
